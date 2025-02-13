@@ -1,0 +1,22 @@
+[project]
+name = "etias-framework"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "ivan",email = "you@example.com"}
+]
+readme = "README.md"
+requires-python = "3.11.11"
+dependencies = [
+    "pandas (>=2.2.3,<3.0.0)",
+    "transformer-lens @ git+ssh://git@github.com/TransformerLensOrg/TransformerLens.git",
+    "neel-plotly @ git+ssh://git@github.com/neelnanda-io/neel-plotly.git",
+    "typing-extensions (>=4.12.2,<5.0.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "numpy (>=2.2.2,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
