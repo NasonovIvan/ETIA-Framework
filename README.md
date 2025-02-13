@@ -1,6 +1,6 @@
 # ETIA Framework
 
-![etias](images/etias_pipeline.pdf)
+![etias](images/etias.jpg)
 
 The Emotion-Aware Textual Influence Activation (ETIA) Framework automatically identifies effective emotional prompts for Large Language Models (LLMs) by quantifying how much they focus on emotion-related tokens. This approach bridges the gap between traditional prompt engineering and the intrinsic mechanisms of model internals, enabling systematic selection of emotional prompts to enhance both model performance and benchmark quality.
 
