@@ -102,7 +102,9 @@ def detect_head(
 
     # Validate error_measure
 
-    assert error_measure in get_args(ErrorMeasure), f"Invalid {error_measure=}; valid values are {get_args(ErrorMeasure)}"
+    assert error_measure in get_args(
+        ErrorMeasure
+    ), f"Invalid {error_measure=}; valid values are {get_args(ErrorMeasure)}"
 
     # Validate detection pattern if it's a string
     if isinstance(detection_pattern, str):
@@ -225,6 +227,7 @@ def get_induction_head_detection_pattern(
 def get_supported_heads() -> None:
     """Returns a list of supported heads."""
     print(f"Supported heads: {HEAD_NAMES}")
+
 
 def compute_head_attention_similarity_score(
     attention_pattern: torch.Tensor,  # [q_pos k_pos]

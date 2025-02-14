@@ -14,7 +14,7 @@ load_dotenv()
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Login to HuggingFace if needed (replace with your token)
-login(token=os.getenv('HUGGINGFACE_API_TOKEN'))
+login(token=os.getenv("HUGGINGFACE_API_TOKEN"))
 
 # Load the model
 model = HookedTransformer.from_pretrained("gpt2", device=device)

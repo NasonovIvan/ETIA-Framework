@@ -3,6 +3,7 @@
 import numpy as np
 from src.utils import get_emotion_token_indices
 
+
 def compute_etias(model, prompt: str, emotion: str, layer_choice: int = -1):
     """
     Calculates the share of attention (ETIAS) given to tokens,
@@ -35,7 +36,9 @@ def compute_etias(model, prompt: str, emotion: str, layer_choice: int = -1):
     logits, cache = model.run_with_cache(tokens, remove_batch_dim=True)
 
     # Extracting the attention matrices for the selected layer
-    attn_matrices = cache["pattern", layer_choice, "attn"]  # [n_heads x seq_len x seq_len]
+    attn_matrices = cache[
+        "pattern", layer_choice, "attn"
+    ]  # [n_heads x seq_len x seq_len]
 
     emo_indices = get_emotion_token_indices(model, prompt, emotion)
 
@@ -56,7 +59,9 @@ def compute_etias(model, prompt: str, emotion: str, layer_choice: int = -1):
     return np.mean(scores)
 
 
-def compute_diff_etias(model, prompt_template: str, emotion: str, layer_choice: int = -1):
+def compute_diff_etias(
+    model, prompt_template: str, emotion: str, layer_choice: int = -1
+):
     """
     Compares the ETIAS for the prompt with the given emotion and the base case ("none").
 
@@ -77,21 +82,24 @@ def compute_diff_etias(model, prompt_template: str, emotion: str, layer_choice: 
      Notes:
        • Uses `compute_etias' to calculate ETIAS values.
        • The greater the difference between the values, the stronger the influence of emotion on the model's attention.
-     """
+    """
 
     prompt_emotion = prompt_template.format(emotion=emotion)
     prompt_none = prompt_template.format(emotion="none")
 
-    etias_emotion = compute_etias(model, prompt_emotion, emotion, layer_choice=layer_choice)
+    etias_emotion = compute_etias(
+        model, prompt_emotion, emotion, layer_choice=layer_choice
+    )
     etias_none = compute_etias(model, prompt_none, "none", layer_choice=layer_choice)
 
     return etias_emotion - etias_none
 
-def compute_diff_detection( # THIS METRIC DOES NOT USE IN THE EMOTIONAL PROMPTING ANALYSIS
+
+def compute_diff_detection(  # THIS METRIC DOES NOT USE IN THE EMOTIONAL PROMPTING ANALYSIS
     model,
     prompt_template: str,
     emotion: str,
-    detection_pattern: str = "previous_token_head"
+    detection_pattern: str = "previous_token_head",
 ):
     """
     Compares the detection scores for the prompt with a specific emotion and the base prompt (with "none").
@@ -113,7 +121,7 @@ def compute_diff_detection( # THIS METRIC DOES NOT USE IN THE EMOTIONAL PROMPTIN
      Notes:
        • Uses the detect_head function to calculate detection scores.
        • The greater the difference between the values, the stronger the influence of emotion on the attention patterns of the model.
-     """
+    """
 
     from transformer_lens.head_detector import detect_head
 

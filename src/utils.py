@@ -2,15 +2,18 @@
 
 import torch
 
+
 def is_square(x: torch.Tensor) -> bool:
     """Checks if `x` is a square matrix."""
     return x.ndim == 2 and x.shape[0] == x.shape[1]
+
 
 def is_lower_triangular(x: torch.Tensor) -> bool:
     """Checks if `x` is a lower triangular matrix."""
     if not is_square(x):
         return False
     return x.equal(x.tril())
+
 
 def find_subsequence(sequence, subsequence):
     """
@@ -19,9 +22,10 @@ def find_subsequence(sequence, subsequence):
     """
     n = len(subsequence)
     for i in range(len(sequence) - n + 1):
-        if sequence[i:i+n] == subsequence:
+        if sequence[i : i + n] == subsequence:
             return i
     return -1
+
 
 def get_emotion_token_indices(model, prompt: str, emotion: str):
     """
@@ -37,7 +41,7 @@ def get_emotion_token_indices(model, prompt: str, emotion: str):
     # We are trying to find tokens based on possible tokenization options.
     variants = [
         emotion_tokens,  # Original tokens
-        [emotion],       # Full word
+        [emotion],  # Full word
         [emotion.lower()],  # In lowercase
     ]
 
